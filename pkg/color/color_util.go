@@ -2,6 +2,7 @@ package color
 
 import (
 	"fmt"
+	"math"
 
 	internal "github.com/hariank/trace/internal"
 	geo "github.com/hariank/trace/pkg/geometry"
@@ -18,7 +19,13 @@ func PPMStr(color Color) string {
 }
 
 func SampledPPMStr(accumulatedColor Color, samplesPerPixel int) string {
-	return PPMStr(accumulatedColor.Scale(1. / float64(samplesPerPixel)))
+	color := accumulatedColor.Scale(1. / float64(samplesPerPixel))
+	color = gamma2Correct(color)
+	return PPMStr(color)
+}
+
+func gamma2Correct(color Color) Color {
+	return Color{math.Sqrt(color.X), math.Sqrt(color.Y), math.Sqrt(color.Z)}
 }
 
 // assuming n is unit length, map components from [-1,1] to [0,1]

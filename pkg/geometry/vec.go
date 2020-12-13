@@ -3,6 +3,8 @@ package geometry
 import (
 	"fmt"
 	"math"
+
+	internal "github.com/hariank/trace/internal"
 )
 
 type Vec struct {
@@ -56,6 +58,33 @@ func (v Vec) Unit() Vec {
 
 func (v Vec) Flip() Vec {
 	return v.Scale(-1.)
+}
+
+func RandomVec() Vec {
+	return Vec{internal.RandomFloat(), internal.RandomFloat(), internal.RandomFloat()}
+}
+
+func RandomVecInUnitSphere() Vec {
+	for {
+		v := RandomVec()
+		if v.MagSquared() >= 1 {
+			continue
+		}
+		return v
+	}
+}
+
+func RandomVecInHemisphere(norm Vec) Vec {
+	v := RandomVecInUnitSphere()
+	if v.Dot(norm) > 0. {
+		return v
+	} else {
+		return v.Flip()
+	}
+}
+
+func RandomVecOnUnitSphere() Vec {
+	return RandomVecInUnitSphere().Unit()
 }
 
 type Point = Vec
