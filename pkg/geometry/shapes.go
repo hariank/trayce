@@ -33,6 +33,7 @@ func NewHittableList() HittableList { // TODO: debug this
 	return HittableList{}
 }
 
+// TODO: fix this
 func (hl HittableList) AddHittables(h ...Hittable) {
 	hl.Objects = append(hl.Objects, h...)
 }
