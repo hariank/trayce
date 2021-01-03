@@ -13,12 +13,12 @@ func (r *Ray) At(t float64) Point {
 	return r.Orig.Plus(r.Dir.Scale(t))
 }
 
-// TODO: figure out how to import materials here
 type HitRecord struct {
 	Loc       Point
 	Norm      Vec // not necessarily unit
 	T         float64
-	FrontFace bool // if hits the front face of object
+	FrontFace bool     // if hits the front face of object
+	Material  Material // the material we hit
 }
 
 // ensure the Norm is always against the ray

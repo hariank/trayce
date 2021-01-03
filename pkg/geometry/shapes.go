@@ -5,12 +5,13 @@ import (
 )
 
 type Sphere struct {
-	Center Point
-	Radius float64
+	Center   Point
+	Radius   float64
+	Material Material
 }
 
-func NewSphere(c Point, ray float64) *Sphere {
-	return &Sphere{Center: c, Radius: ray}
+func NewSphere(c Point, ray float64, m Material) *Sphere {
+	return &Sphere{Center: c, Radius: ray, Material: m}
 }
 
 func (s *Sphere) Hit(ray *Ray, tMin float64, tMax float64) (bool, *HitRecord) {
@@ -34,7 +35,7 @@ func (s *Sphere) Hit(ray *Ray, tMin float64, tMax float64) (bool, *HitRecord) {
 	}
 
 	hitLoc := ray.At(root)
-	record := &HitRecord{Loc: hitLoc, T: root}
+	record := &HitRecord{Loc: hitLoc, T: root, Material: s.Material}
 	norm := hitLoc.Minus(s.Center).Scale(1. / s.Radius)
 	record.SetFaceNormal(ray, norm)
 	return true, record

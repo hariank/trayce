@@ -11,14 +11,10 @@ type Camera interface {
 }
 
 type PinholeCamera struct {
-	AspectRatio    float64
-	ViewportHeight float64
-	ViewportWidth  float64
-	FocalLength    float64
-	origin         geo.Vec
-	vpHorizontal   geo.Vec
-	vpVertical     geo.Vec
-	vpLowerLeft    geo.Vec
+	AspectRatio, ViewportHeight, ViewportWidth float64
+	FocalLength                                float64
+	origin                                     geo.Vec
+	vpHorizontal, vpVertical, vpLowerLeft      geo.Vec
 }
 
 func NewPinholeCamera(aspectRatio float64) *PinholeCamera {

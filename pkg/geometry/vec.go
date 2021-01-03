@@ -60,6 +60,11 @@ func (v Vec) Flip() Vec {
 	return v.Scale(-1.)
 }
 
+func (v Vec) NearZero() bool {
+	thresh := 1e-8
+	return math.Abs(v.X) < thresh && math.Abs(v.Y) < thresh && math.Abs(v.Z) < thresh
+}
+
 func RandomVec() Vec {
 	return Vec{internal.RandomFloat(), internal.RandomFloat(), internal.RandomFloat()}
 }
